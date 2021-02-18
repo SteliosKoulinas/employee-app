@@ -1,3 +1,5 @@
+I used firebase for my backend and I added one more entity to store all my assignments.
+
 # Employeeapp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.1.
