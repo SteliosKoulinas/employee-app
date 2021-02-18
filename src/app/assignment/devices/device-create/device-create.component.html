@@ -1,0 +1,79 @@
+<div class="container-fluid">
+    <h5>Devices</h5>
+
+    <table class="table w-auto">
+        <thead>
+            <tr>
+                <th scope="col">Serial Number</th>
+                <th scope="col">Description</th>
+                <th scope="col">Type</th>
+                <th scope="col">Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let device of mydevices">
+                <th scope="row">{{device.sn}}</th>
+                <td>{{device.description}}</td>
+                <td>{{device.type}}</td>
+                <td> <button type="submit" class="btn btn-danger" (click)="deletedevice(device.sn)">delete</button>
+                    <button type="submit" class="btn btn-primary" (click)="edit=!edit">edit</button>
+                <td>
+
+                <td> <button type="submit" class="btn" (click)="getdevice(device.sn)">Get by SN</button></td>
+
+                <div class="row">
+
+                    <form *ngIf="edit" [formGroup]="myformedit" (ngSubmit)="editdevice(device.sn,device.available) ">
+                        <div class="form-group">
+                            <label for="Description">Description</label>
+                            <select formControlName="description" name="description" class="form-control"
+                                id="description">
+                                <option value="mobile">Mobile</option>
+                                <option value="laptop">Laptop</option>
+                                <option value="notebook">Notebook</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="type">Type:</label>
+                            <input type="number" class="form-control" name="type" placeholder="Enter Type" id="type"
+                                formControlName="type">
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" name="available" value="true" id="available"
+                                formControlName="available">
+                        </div>
+                        <button class="btn btn-primary" type="submit" [disabled]="!myformedit.valid">Submit</button>
+
+                    </form>
+
+                </div>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <button [hidden]="add" class="btn btn-primary" (click)="add=!add">Add Device</button>
+
+    <form *ngIf="add" [formGroup]="myform" (ngSubmit)=createdevice() novalidate>
+
+        <div class="form-group">
+            <label for="Description">Description</label>
+            <select formControlName="description" name="description" class="form-control" id="description">
+                <option value="mobile">Mobile</option>
+                <option value="laptop">Laptop</option>
+                <option value="notebook">Notebook</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="type">Type:</label>
+            <input type="number" class="form-control" name="type" placeholder="Enter Type" id="type"
+                formControlName="type">
+        </div>
+        <div class="form-group">
+            <input type="hidden" class="form-control" name="available" value="true" id="available"
+                formControlName="available">
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="!myform.valid">Submit</button>
+    </form>
+</div>

@@ -1,0 +1,56 @@
+<div class="container-fluid">
+    <div class=row>
+        <div class="col-6">
+            <app-employees (selectedemployee)="getselectedemployee($event)"></app-employees>
+        </div>
+        <div class="col-6">
+            <app-devices (selecteddevice)="getselecteddevice($event)"></app-devices>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-danger" (click)="createconnection()">assign</button>
+    <div class=row>
+        <ng-container *ngIf="flag==true">
+            <table class="table w-auto">
+                <thead class="text-center">
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">name</th>
+                        <th scope="col">email</th>
+                        <ng-container *ngIf="flagdevices==true">
+                            <th scope="col"></th>
+                            <th scope="col">Device S/N</th>
+                            <ng-container *ngIf="flagdeviceinfo==true">
+                                <th scope="col">Device Info</th>
+                            </ng-container>
+                        </ng-container>
+
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    <tr>
+                        <td>{{employee.id}}</td>
+                        <td>{{employee.name}}</td>
+                        <td>{{employee.email}}</td>
+                        <td><button class="btn btn-primary" (click)="getdevices(employee.id)">devices</button></td>
+
+                        <ng-container *ngIf="flagdevices==true">
+
+                            <div *ngFor="let key of selecteddevices">
+                                <td><button class="btn" (click)="deviceinfo(key)">{{key}}</button></td>
+                                <td><button class="btn btn-danger" (click)="delconnection(key)">Delete</button></td>
+                            </div>
+                            <ng-container *ngIf="flagdeviceinfo==true">
+                                <td>Description: {{device.description}} <br> Type: {{device.type}}</td>
+
+                            </ng-container>
+
+                        </ng-container>
+                    </tr>
+                </tbody>
+            </table>
+        </ng-container>
+    </div>
+
+
+</div>
